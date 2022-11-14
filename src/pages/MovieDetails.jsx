@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
-import {
-  useParams,
-  useLocation,
-  Link,
-  Outlet,
-  //   useNavigate,
-} from 'react-router-dom';
+import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { getMovieDetails } from 'services/api';
 
 import { MovieInfo } from '../components/MovieInfo';
+import {
+  LinkBtn,
+  Container,
+  AddInfo,
+  AddInfoTitle,
+  AddInfoItem,
+  AddInfoWrapper,
+} from '../pages/MovieDetails.styled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  //   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -23,37 +24,36 @@ export const MovieDetails = () => {
       .catch(error => console.log(error));
   }, [movieId]);
 
-  //   const onGoBackBtn = () => {
-  //     navigate(location.state?.from ?? '/');
-  //   };
-
   return (
     <>
       {movie && (
-        <main>
-          {/* <button type="button" onClick={onGoBackBtn}>
-            Go back
-          </button> */}
-          <Link to={location.state?.from ?? '/'}>Go back</Link>
+        <Container>
+          <LinkBtn to={location.state?.from ?? '/'}>Go back</LinkBtn>
           <MovieInfo info={movie}></MovieInfo>
-          <div>
-            <p> Additional information</p>
-            <ul>
-              <li>
-                <Link to="cast">Cast</Link>
-              </li>
-              <li>
-                <Link to="reviews">Reviews</Link>
-              </li>
-            </ul>
-            <Suspense fallback={<div>Loading subpage...</div>}>
+          <AddInfo>
+            <AddInfoTitle> Additional information</AddInfoTitle>
+            <AddInfoWrapper>
+              <ul>
+                <AddInfoItem>
+                  <Link to="cast" state={{ from: location.state?.from }}>
+                    Cast
+                  </Link>
+                </AddInfoItem>
+                <AddInfoItem>
+                  <Link to="reviews" state={{ from: location.state?.from }}>
+                    Reviews
+                  </Link>
+                </AddInfoItem>
+              </ul>
+            </AddInfoWrapper>
+            <Suspense fallback={<div>Loading...</div>}>
               <Outlet />
             </Suspense>
-          </div>
-        </main>
+          </AddInfo>
+        </Container>
       )}
     </>
   );
 };
 
-// state={{ from: location.state?.from }}
+export default MovieDetails;

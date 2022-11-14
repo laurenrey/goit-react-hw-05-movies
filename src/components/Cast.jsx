@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from '../services/api';
-// import PropTypes from 'prop-types';
+import { CastItem, CastInfo } from './Cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
   const baseURL = 'https://image.tmdb.org/t/p/w200';
-  const defaultURL = 'https://www.freeiconspng.com/img/23505';
+  const noImage = './image/images.jpg';
 
   useEffect(() => {
     getMovieCast(movieId)
@@ -23,15 +23,15 @@ export const Cast = () => {
       <ul>
         {cast.map(({ profile_path, name, character, id }) => {
           return (
-            <li key={id}>
+            <CastItem key={id}>
               <img
-                src={profile_path ? `${baseURL}${profile_path}` : defaultURL}
+                src={profile_path ? `${baseURL}${profile_path}` : noImage}
                 alt=""
                 width="200"
               />
-              <p>{name}</p>
-              <p>Character: {character}</p>
-            </li>
+              <CastInfo>{name}</CastInfo>
+              <CastInfo>Character: {character}</CastInfo>
+            </CastItem>
           );
         })}
       </ul>
@@ -39,9 +39,4 @@ export const Cast = () => {
   );
 };
 
-// Cast.propTypes = {
-//   //   id: PropTypes.number.isRequired,
-//   name: PropTypes.string.isRequired,
-//   character: PropTypes.string.isRequired,
-//   profile_path: PropTypes.string,
-// };
+export default Cast;

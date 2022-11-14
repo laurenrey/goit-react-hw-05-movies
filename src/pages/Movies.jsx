@@ -1,8 +1,17 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { searchMovie } from '../services/api';
+import {
+  MoviesSection,
+  MoviesForm,
+  MoviesInput,
+  Button,
+  MoviesListContainer,
+  LinkTitle,
+  MoviesItem,
+} from './Movies.styled';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,24 +45,23 @@ export const Movies = () => {
   }, [movieSearch]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={query} onChange={handleChange} />
-        <button type="submit">Search</button>
-      </form>
+    <MoviesSection>
+      <MoviesForm onSubmit={handleSubmit}>
+        <MoviesInput type="text" value={query} onChange={handleChange} />
+        <Button type="submit">Search</Button>
+      </MoviesForm>
 
-      {movies !==
-        0(
-          <ul>
-            {movies.map(({ id, original_title }) => (
-              <li key={id}>
-                <Link to={`${id}`} state={{ from: location }}>
-                  {original_title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-    </>
+      <MoviesListContainer>
+        {movies.map(({ id, original_title }) => (
+          <MoviesItem key={id}>
+            <LinkTitle to={`/movies/${id}`} state={{ from: location }}>
+              {original_title}
+            </LinkTitle>
+          </MoviesItem>
+        ))}
+      </MoviesListContainer>
+    </MoviesSection>
   );
 };
+
+export default Movies;

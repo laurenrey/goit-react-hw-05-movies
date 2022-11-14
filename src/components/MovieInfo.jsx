@@ -1,4 +1,11 @@
 import PropTypes from 'prop-types';
+import {
+  MovieInfoContainer,
+  MovieInfoWrapper,
+  MovieInfoTitle,
+  MovieInfoSubTitle,
+  MovieInfoDetails,
+} from './MovieInfo.styled';
 
 export const MovieInfo = ({ info }) => {
   const {
@@ -10,23 +17,30 @@ export const MovieInfo = ({ info }) => {
     genres,
   } = info;
   const baseURL = 'https://image.tmdb.org/t/p/w300';
-  const defaultURL = 'https://www.freeiconspng.com/img/23505';
+  const noImage = './image/images.jpg';
+  const getYear = () => new Date(`${release_date}`).getFullYear();
+  const getScor = () => Math.round(`${vote_average}` * 10);
 
   return (
-    <div>
+    <MovieInfoContainer>
       <img
-        src={poster_path ? `${baseURL}${poster_path}` : defaultURL}
+        src={poster_path ? `${baseURL}${poster_path}` : noImage}
         alt={original_title}
+        width="300"
       />
-      <h1>
-        {original_title} ({release_date})
-      </h1>
-      <p>User Score : {vote_average}</p>
-      <p>Overview </p>
-      <p>{overview}</p>
-      <p>Genres</p>
-      <p>{genres.map(genre => genre.name).join(' ')}</p>
-    </div>
+      <MovieInfoWrapper>
+        <MovieInfoTitle>
+          {original_title} ({getYear()})
+        </MovieInfoTitle>
+        <MovieInfoDetails>User Score : {getScor()}%</MovieInfoDetails>
+        <MovieInfoSubTitle>Overview </MovieInfoSubTitle>
+        <MovieInfoDetails>{overview}</MovieInfoDetails>
+        <MovieInfoSubTitle>Genres</MovieInfoSubTitle>
+        <MovieInfoDetails>
+          {genres.map(genre => genre.name).join(', ')}
+        </MovieInfoDetails>
+      </MovieInfoWrapper>
+    </MovieInfoContainer>
   );
 };
 
