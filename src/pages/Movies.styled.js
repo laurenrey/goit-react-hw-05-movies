@@ -13,13 +13,19 @@ export const MoviesInput = styled.input`
   padding: 8px;
   width: 200px;
   font-size: 18px;
+  outline: transparent;
+  border: 1px solid #e1d3c1;
+  :hover,
+  :focus {
+    border-color: #b4a89a;
+  }
 `;
 export const Button = styled.button`
   width: 70px;
   height: 40px;
   font-size: 16px;
   background-color: #faebd7;
-  border: 1px solid black;
+  border: 1px solid #e1d3c1;
   :hover {
     background-color: #c27ba0;
     color: #ffffff;
