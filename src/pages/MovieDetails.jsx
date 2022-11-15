@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useLocation, Link, Outlet } from 'react-router-dom';
+import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { getMovieDetails } from 'services/api';
 
@@ -11,6 +11,7 @@ import {
   AddInfoTitle,
   AddInfoItem,
   AddInfoWrapper,
+  AddInfoItemLink,
 } from '../pages/MovieDetails.styled';
 
 const MovieDetails = () => {
@@ -35,14 +36,20 @@ const MovieDetails = () => {
             <AddInfoWrapper>
               <ul>
                 <AddInfoItem>
-                  <Link to="cast" state={{ from: location.state?.from }}>
+                  <AddInfoItemLink
+                    to="cast"
+                    state={{ from: location.state?.from }}
+                  >
                     Cast
-                  </Link>
+                  </AddInfoItemLink>
                 </AddInfoItem>
                 <AddInfoItem>
-                  <Link to="reviews" state={{ from: location.state?.from }}>
+                  <AddInfoItemLink
+                    to="reviews"
+                    state={{ from: location.state?.from }}
+                  >
                     Reviews
-                  </Link>
+                  </AddInfoItemLink>
                 </AddInfoItem>
               </ul>
             </AddInfoWrapper>

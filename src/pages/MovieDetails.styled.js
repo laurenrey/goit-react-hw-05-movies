@@ -33,3 +33,10 @@ export const AddInfoItem = styled.li`
 export const AddInfoWrapper = styled.div`
   padding: 16px;
 `;
+
+export const AddInfoItemLink = styled(Link)`
+  color: blue;
+  :hover {
+    color: #c27ba0;
+  }
+`;
