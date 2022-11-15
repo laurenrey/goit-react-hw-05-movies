@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from '../services/api';
 import { CastItem, CastInfo } from './Cast.styled';
+import noImage from './image/no-image.jpg';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { movieId } = useParams();
   const baseURL = 'https://image.tmdb.org/t/p/w200';
-  const noImage = './image/images.jpg';
 
   useEffect(() => {
     getMovieCast(movieId)
@@ -16,7 +16,7 @@ const Cast = () => {
   }, [movieId]);
 
   if (cast.length === 0) {
-    return 'There is no cast information for this film yet';
+    return "We don't have any cast information on this movie.";
   }
   return (
     <>

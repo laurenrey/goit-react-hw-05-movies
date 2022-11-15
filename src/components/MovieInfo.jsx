@@ -6,6 +6,7 @@ import {
   MovieInfoSubTitle,
   MovieInfoDetails,
 } from './MovieInfo.styled';
+import noImage from './image/no-image.jpg';
 
 export const MovieInfo = ({ info }) => {
   const {
@@ -17,7 +18,7 @@ export const MovieInfo = ({ info }) => {
     genres,
   } = info;
   const baseURL = 'https://image.tmdb.org/t/p/w300';
-  const noImage = './image/images.jpg';
+
   const getYear = () => new Date(`${release_date}`).getFullYear();
   const getScor = () => Math.round(`${vote_average}` * 10);
 
