@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getTrandingMovies } from 'services/api';
 
 import { Container, Title } from './Home.styled';
-import { MovieList } from '../components/MovieList';
+import { MovieList } from '../../components/MovieList/MovieList';
 
 const Home = () => {
   const [trandingMovies, setTrandingMovies] = useState([]);

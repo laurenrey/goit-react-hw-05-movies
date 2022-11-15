@@ -6,7 +6,7 @@ import {
   MovieInfoSubTitle,
   MovieInfoDetails,
 } from './MovieInfo.styled';
-import noImage from './image/no-image.jpg';
+import noImage from '../image/no-image.jpg';
 
 export const MovieInfo = ({ info }) => {
   const {

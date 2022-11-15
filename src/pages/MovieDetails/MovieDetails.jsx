@@ -3,7 +3,7 @@ import { useParams, useLocation, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { getMovieDetails } from 'services/api';
 
-import { MovieInfo } from '../components/MovieInfo';
+import { MovieInfo } from '../../components/MovieInfo/MovieInfo';
 import {
   LinkBtn,
   Container,
@@ -12,7 +12,7 @@ import {
   AddInfoItem,
   AddInfoWrapper,
   AddInfoItemLink,
-} from '../pages/MovieDetails.styled';
+} from '../MovieDetails/MovieDetails.styled';
 
 const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
@@ -25,29 +25,25 @@ const MovieDetails = () => {
       .catch(error => console.log(error));
   }, [movieId]);
 
+  const from = location.state?.from ?? '/';
+
   return (
     <>
       {movie && (
         <Container>
-          <LinkBtn to={location.state?.from ?? '/'}>Go back</LinkBtn>
+          <LinkBtn to={from}>Go back</LinkBtn>
           <MovieInfo info={movie}></MovieInfo>
           <AddInfo>
             <AddInfoTitle> Additional information</AddInfoTitle>
             <AddInfoWrapper>
               <ul>
                 <AddInfoItem>
-                  <AddInfoItemLink
-                    to="cast"
-                    state={{ from: location.state?.from }}
-                  >
+                  <AddInfoItemLink to="cast" state={{ from }}>
                     Cast
                   </AddInfoItemLink>
                 </AddInfoItem>
                 <AddInfoItem>
-                  <AddInfoItemLink
-                    to="reviews"
-                    state={{ from: location.state?.from }}
-                  >
+                  <AddInfoItemLink to="reviews" state={{ from }}>
                     Reviews
                   </AddInfoItemLink>
                 </AddInfoItem>

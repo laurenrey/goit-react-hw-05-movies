@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
-import { searchMovie } from '../services/api';
+import { useSearchParams } from 'react-router-dom';
+import { searchMovie } from '../../services/api';
+import { MovieList } from '../../components/MovieList/MovieList';
 import {
   MoviesSection,
   MoviesForm,
   MoviesInput,
   Button,
-  MoviesListContainer,
-  LinkTitle,
-  MoviesItem,
 } from './Movies.styled';
 
 const Movies = () => {
@@ -16,7 +14,6 @@ const Movies = () => {
   const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const location = useLocation();
   const movieSearch = searchParams.get('query');
 
   const handleChange = e => {
@@ -51,15 +48,7 @@ const Movies = () => {
         <Button type="submit">Search</Button>
       </MoviesForm>
 
-      <MoviesListContainer>
-        {movies.map(({ id, original_title }) => (
-          <MoviesItem key={id}>
-            <LinkTitle to={`/movies/${id}`} state={{ from: location }}>
-              {original_title}
-            </LinkTitle>
-          </MoviesItem>
-        ))}
-      </MoviesListContainer>
+      {!!movies.length && <MovieList movies={movies} />}
     </MoviesSection>
   );
 };

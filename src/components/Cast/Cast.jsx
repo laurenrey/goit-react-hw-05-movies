@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getMovieCast } from '../services/api';
+import { getMovieCast } from '../../services/api';
 import { CastItem, CastInfo } from './Cast.styled';
-import noImage from './image/no-image.jpg';
+import noImage from '../image/no-image.jpg';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
